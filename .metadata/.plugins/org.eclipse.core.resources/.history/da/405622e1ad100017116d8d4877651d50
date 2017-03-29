@@ -1,0 +1,71 @@
+package com.next;
+
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+public class MainClass {
+
+
+	private static final String FILENAME = "/home/next/Desktop/json.text";
+	
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		MainClass obj = new MainClass();
+		String responce=obj.readJson();
+		
+		try {
+			JSONObject jsonObject = new JSONObject(responce);
+			JSONArray jsonArray = jsonObject.getJSONArray("studentdetails");
+			for(int i=0;i<jsonArray.length();i++)
+			{
+				
+			
+			}
+		
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+         
+         
+	}
+
+	private String readJson()
+	{
+		BufferedReader br;
+		try {
+			br = new BufferedReader(new FileReader(FILENAME));
+			StringBuilder sb = new StringBuilder();
+		    String line;
+			try {
+				line = br.readLine();
+			
+
+		    while (line != null) {
+		        sb.append(line);
+		        sb.append(System.lineSeparator());
+		        line = br.readLine();
+		    }
+		    String everything = sb.toString();
+		    return everything;
+			
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	return null;
+	}
+	
+}

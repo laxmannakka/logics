@@ -1,0 +1,79 @@
+package com.next;
+
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+public class MainClass {
+
+
+	private static final String FILENAME = "/home/next/Desktop/json.text";
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		MainClass obj = new MainClass();
+		String responce=obj.readJson();
+		ArrayList<Student>studentArrayList = new ArrayList<>();
+
+		try {
+			JSONObject jsonObject = new JSONObject(responce);
+			JSONArray jsonArray = jsonObject.getJSONArray("studentdetails");
+			for(int i=0;i<jsonArray.length();i++)
+			{
+				JSONObject json = jsonArray.getJSONObject(i);				
+				Student student = new Student();
+                student.setName(json.getString("name"));
+                student.setId(json.getString("id"));
+                student.setRollNo(json.getInt("roolNo"));
+                studentArrayList.add(student);
+			
+			}
+		
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+        int size = studentArrayList.size(); 
+		System.out.println("size of list"+size);
+         
+	}
+
+	private String readJson()
+	{
+		BufferedReader br;
+		try {
+			br = new BufferedReader(new FileReader(FILENAME));
+			StringBuilder sb = new StringBuilder();
+		    String line;
+			try {
+				line = br.readLine();
+			
+
+		    while (line != null) {
+		        sb.append(line);
+		        sb.append(System.lineSeparator());
+		        line = br.readLine();
+		    }
+		    String everything = sb.toString();
+		    return everything;
+			
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	return null;
+	}
+	
+}

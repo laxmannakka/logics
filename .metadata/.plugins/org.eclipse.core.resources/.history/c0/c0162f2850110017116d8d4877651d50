@@ -1,0 +1,6 @@
+package com.next;
+
+public class SubsCriptions 
+{
+	Student student;
+}

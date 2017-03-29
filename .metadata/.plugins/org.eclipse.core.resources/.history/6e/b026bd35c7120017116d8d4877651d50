@@ -1,0 +1,137 @@
+package com.next;
+
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+public class MainClass {
+
+	public ArrayList<Student> studentArrayList = new ArrayList<>();
+
+	private String readJson() {
+		BufferedReader br;
+		try {
+			br = new BufferedReader(new FileReader("Json.text"));
+			StringBuilder sb = new StringBuilder();
+			String line;
+			try {
+				line = br.readLine();
+
+				while (line != null) {
+					sb.append(line);
+					sb.append(System.lineSeparator());
+					line = br.readLine();
+				}
+				String everything = sb.toString();
+				return everything;
+
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return null;
+	}
+
+	private void parseResponce(String responce) {
+		try {
+			JSONObject jsonObject = new JSONObject(responce);
+			JSONArray jsonArray = jsonObject.getJSONArray("studentdetails");
+			for (int i = 0; i < jsonArray.length(); i++) {
+				JSONObject json = jsonArray.getJSONObject(i);
+				Student student = new Student();
+				student.setName(json.getString("name"));
+				student.setId(json.getString("id"));
+				student.setRollNo(json.getInt("roolNo"));
+				studentArrayList.add(student);
+
+			}
+
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	private void sortByName() {
+		ArrayList<Student> tempList = studentArrayList;
+
+		Collections.sort(tempList, new Comparator<Student>() {
+			@Override
+			public int compare(Student s1, Student s2) {
+				return s1.getName().compareToIgnoreCase(s2.getName());
+			}
+
+		});
+
+		System.out.println("Sort by names");
+
+		for (int i = 0; i < tempList.size(); i++) {
+			Student student = tempList.get(i);
+			System.out.println("" + student.getName());
+		}
+
+	}
+
+	private void sortByroolNo() {
+		ArrayList<Student> tempList = studentArrayList;
+		Collections.sort(tempList, new Comparator<Student>() {
+			@Override
+			public int compare(Student p1, Student p2) {
+				return p1.rollNo - p2.rollNo;
+			}
+		});
+
+		System.out.println("Sort by roll no");
+
+		for (int i = 0; i < tempList.size(); i++) {
+			Student student = tempList.get(i);
+			System.out.println("" + student.getRollNo());
+
+		}
+	}
+
+	private void sortById() {
+		ArrayList<Student> tempList = studentArrayList;
+		Collections.sort(tempList, new Comparator<Student>() {
+			@Override
+			public int compare(Student o1, Student o2) {
+				String string1 = o1.getId();
+				String string2 = o2.getId();
+				String id1 = string1.substring(string1.indexOf("_") + 1);
+				String id2 = string2.substring(string2.indexOf("_") + 1);
+				return id1.compareToIgnoreCase(id2);
+			}
+		});
+		System.out.println("Sort by id");
+
+		for (int i = 0; i < tempList.size(); i++) {
+			Student student = tempList.get(i);
+			System.out.println("" + student.getId());
+		}
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		MainClass obj = new MainClass();
+		String responce = obj.readJson();
+		obj.parseResponce(responce);
+		obj.sortByName();
+		obj.sortById();
+		obj.sortByroolNo();
+
+	}
+
+}

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename local variable &apos;a&apos; in &apos;com.next.ConverStringAsTitle.main(...)&apos; to &apos;character&apos;&#x0A;- Original project: &apos;ConvertTitleCase&apos;&#x0A;- Original element: &apos;com.next.ConverStringAsTitle.main(String[]).a&apos;&#x0A;- Renamed element: &apos;a&apos;&#x0A;- Update references to refactored element" description="Rename local variable &apos;a&apos;" id="org.eclipse.jdt.ui.rename.local.variable" input="/src&lt;com.next{ConverStringAsTitle.java[ConverStringAsTitle~main~\[QString;@a!334!341!339!339!C!0!false" name="character" references="true" stamp="1490607752756" version="1.0"/>
+</session>

@@ -1,0 +1,45 @@
+package com.next;
+
+import java.util.ArrayList;
+
+public class RemoveElement {
+
+
+    ArrayList<Integer> list = new ArrayList<>();
+
+    private void addElements()
+    {
+        for (int i = 0; i < 50; i++)
+        {
+            list.add(i, i + 2);
+        }
+    }
+
+    private void removeElements()
+    {
+        while (list.size() > 1)
+        {
+            for (int i = 0; i < list.size(); i++)
+            {
+                if (i % 3 == 0)
+                {//Every 3rd element should be true
+                    list.remove(i);
+                    System.out.println("removed at"+i);
+                }
+            }
+        }
+        System.out.print(list);
+
+    }
+	
+	public static void main(String[] args)
+	{
+		// TODO Auto-generated method stub
+
+		RemoveElement obj = new RemoveElement();
+		obj.addElements();
+		obj.removeElements();
+		
+	}
+
+}

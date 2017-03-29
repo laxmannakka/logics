@@ -1,0 +1,30 @@
+package com.next;
+
+import java.util.ArrayList;
+
+public class MainClass {
+
+	
+ArrayList<SubsCriptions> subscriptionList = new ArrayList<>();
+	
+	
+private void populateSubscription()
+{
+	new Student()
+	
+	
+}
+	
+	
+	
+	
+	
+	public static void main(String[] args) 
+	{
+		// TODO Auto-generated method stub
+
+		MainClass obj = new MainClass();
+		obj.populateSubscription();
+	}
+
+}

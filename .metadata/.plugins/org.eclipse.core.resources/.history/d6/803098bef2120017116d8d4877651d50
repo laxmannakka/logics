@@ -1,0 +1,69 @@
+{
+  "Resources": [
+    {
+      "fileid": 1,
+      "segments": [
+        {
+          "frameid": 1,
+          "numberofframes": 2
+        },
+        {
+          "frameid": 2,
+          "numberofframes": 2
+        }
+      ]
+    },
+    {
+      "fileid": 2,
+      "segments": [
+        {
+          "frameid": 3,
+          "numberofframes": 2
+        },
+        {
+          "frameid": 4,
+          "numberofframes": 2
+        }
+      ]
+    },
+    {
+      "fileid": 3,
+      "segments": [
+        {
+          "frameid": 5,
+          "numberofframes": 2
+        },
+        {
+          "frameid": 6,
+          "numberofframes": 2
+        }
+      ]
+    },
+    {
+      "fileid": 4,
+      "segments": [
+        {
+          "frameid": 6,
+          "numberofframes": 2
+        },
+        {
+          "frameid": 7,
+          "numberofframes": 2
+        }
+      ]
+    },
+    {
+      "fileid": 5,
+      "segments": [
+        {
+          "frameid": 8,
+          "numberofframes": 2
+        },
+        {
+          "frameid": 9,
+          "numberofframes": 2
+        }
+      ]
+    }
+  ]
+}

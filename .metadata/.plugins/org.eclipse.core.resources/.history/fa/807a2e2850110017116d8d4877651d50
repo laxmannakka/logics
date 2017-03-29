@@ -1,0 +1,10 @@
+package com.next;
+
+import java.util.List;
+
+public class Student {
+
+	String name;
+	int studentId;
+	List<Course> courseList;
+}

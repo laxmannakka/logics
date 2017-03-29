@@ -1,0 +1,31 @@
+package com.next;
+
+import java.util.List;
+
+public class FileModal 
+{
+
+	int fileId;
+	List<Segment> segments;
+
+
+public int getFileId() {
+	return fileId;
+}
+public FileModal(int fileId, List<Segment> segments) {
+	super();
+	this.fileId = fileId;
+	this.segments = segments;
+}
+public void setFileId(int fileId) {
+	this.fileId = fileId;
+}
+public List<Segment> getSegments() {
+	return segments;
+}
+public void setSegments(List<Segment> segments) {
+	this.segments = segments;
+}
+
+
+}

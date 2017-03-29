@@ -1,0 +1,118 @@
+package com.next;
+
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+public class CalCulatingFrames {
+
+	List<FileModal> files = new ArrayList<>();
+	
+	private String readJson() 
+	{
+		BufferedReader bufferReader;
+		try {
+			bufferReader = new BufferedReader(new FileReader("Json.text"));
+			StringBuilder sb = new StringBuilder();
+			String line;
+			try {
+				line = bufferReader.readLine();
+
+				while (line != null) {
+					sb.append(line);
+					sb.append(System.lineSeparator());
+					line = bufferReader.readLine();
+				}
+				String jsonData = sb.toString();
+				return jsonData;
+
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return null;
+	}
+	
+	private void parseJson(String responce)
+	{
+		JSONObject jsonObject;
+		try {
+			jsonObject = new JSONObject(responce);
+		
+			JSONArray jsonArray = jsonObject.getJSONArray("Resources");
+			for(int i=0;i<jsonArray.length();i++)
+			{
+				JSONObject json = jsonArray.getJSONObject(i);
+				int fileId = json.getInt("fileid");
+				JSONArray segmentArray = json.getJSONArray("segments");
+				
+				List<Segment> segmentList = new ArrayList<>();
+
+				for(int j=0;j<segmentArray.length();j++)
+				{
+					JSONObject segmentJson = segmentArray.getJSONObject(j);
+					Segment segment = new Segment(segmentJson.getInt("frameid"),segmentJson.getInt("numberofframes"));
+					segmentList.add(segment);
+				}
+				
+				files.add(new FileModal(fileId, segmentList));
+			}
+			
+			System.out.println("files size"+files.size());
+		
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
+	private void calculateProgress()
+	{
+		int frameCount=0;
+	Iterator iterator = files.iterator();	
+	while(iterator.hasNext())
+	{
+		FileModal fileModal  =	(FileModal)iterator.next();
+			List<Segment> segment =	fileModal.getSegments();
+			for(int i=0;i<segment.size();i++)
+			{
+				frameCount++;
+			}
+	}
+	setMaxAndMin(frameCount);
+		
+	}
+	
+	private void setMaxAndMin(int framecount)
+	{
+		int minValue = 0;
+		int maxValue = framecount*24;
+		System.out.println("total Max value"+maxValue);
+	}
+	
+	public static void main(String[] args) 
+	{
+		// TODO Auto-generated method stub
+
+	CalCulatingFrames frames = new CalCulatingFrames();
+
+	String response = frames.readJson();
+	frames.parseJson(response);
+	frames.calculateProgress();
+	}
+
+}

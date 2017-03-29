@@ -1,0 +1,49 @@
+package com.next;
+
+import java.lang.reflect.Array;
+import java.util.Random;
+
+public class ShuffleArray {
+
+	int array[] =  {1,2,33,4,55,6,67,8,9,10};
+
+	
+	public  void shuffle() {
+		Random random = null;
+
+		if (random == null) {
+			random = new Random();
+	        }
+	        int count = array.length;
+	        for (int i = count; i > 1; i--) 
+	        {
+	            swap(i - 1, random.nextInt(i));
+	        }
+	    }
+	 private  void swap(int i, int j) 
+	 {
+	        int temp = array[i];
+	        array[i] = array[j];
+	        array[j] = temp;
+	   }
+	
+	 private void printArray()
+	 {
+		 System.out.println("After Shufling Array ");
+			for(int i=0;i<array.length;i++)
+			{
+				System.out.print(" "+i);
+				
+			}
+			
+	 }
+	
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		ShuffleArray object = new ShuffleArray();
+		object.shuffle();
+		object.printArray();
+	
+	}
+
+}
